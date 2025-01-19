@@ -1,38 +1,3 @@
-/*const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'anicu2314@gmail.com',
-      pass: 'mrzz crlq pbgx qbvl ', 
-    },
-  });
-
-
-let destinatario= "";
-let asunto= "";
-//Ejemplo mientras accedo a esto por medio de un html
-let cuerpo='¡Hola! <3.';
-let cuerpoHtml='<b>¡Hola!</b> <i><3</i>';
-
-const mailOptions = {
-    from: 'anicu2314@gmail.com', 
-    to: destinatario, 
-    subject: asunto,
-    text: cuerpo, 
-    html: cuerpoHtml
-};
-
-const mandarCorreos= (remitente) =>{
-    return new Promise((resolve, reject) =>{
-        resolve (transporter.sendMail(mailOptions, (error, info) => {
-            if(error){
-                console.log(error);
-            }else{
-                console.log('Correo enviado: ', info.response);
-            }
-        }));
-    });
-    
-}*/
 const nodemailer = require('nodemailer');
 
 let asunto= "Asunto ejemplo";
@@ -68,7 +33,7 @@ function enviarCorreo(destinatario) {
   });
 }
 
-let arregloCorreos=[correo1, correo2]
+let arregloCorreos=['anam.cuellarg@uqvirtual.edu.co', 'junikoescobar11@gmail.com']
 let arregloPromesas=[];
 
 for(let i=0;i<arregloCorreos.length;i++){
