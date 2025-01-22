@@ -33,15 +33,25 @@ function enviarCorreo(destinatario) {
   });
 }
 
-let arregloCorreos=['anam.cuellarg@uqvirtual.edu.co', 'junikoescobar11@gmail.com']
-let arregloPromesas=[];
-
-for(let i=0;i<arregloCorreos.length;i++){
-    arregloPromesas.push(enviarCorreo(arregloCorreos[i]));
+function enviar(){
+    try{
+        const correos = document.getElementById('correos').value;
+        let arregloCorreos= correos.split(',').map(correo => correo.trim());
+        let arregloPromesas=[];
+    
+        for(let i=0;i<arregloCorreos.length;i++){
+            arregloPromesas.push(enviarCorreo(arregloCorreos[i]));
+        }
+    
+        Promise.all(arregloPromesas).then((resultado)=>{
+            console.log(resultado);
+            
+        }).catch((error) =>{
+            console.log(error);
+        });
+    }catch(error){
+        console.log(error);
+    }
+    
 }
 
-Promise.all(arregloPromesas).then((resultado)=>{
-    console.log(resultado);
-}).catch((error) =>{
-    console.log(error);
-});
