@@ -1,9 +1,15 @@
 const nodemailer = require('nodemailer');
+const readline = require("readline");
 
 let asunto= "Asunto ejemplo";
 //Ejemplo mientras accedo a esto por medio de un html
 let cuerpo='¡Hola! <3.';
 let cuerpoHtml='<b>¡Hola!</b> <i><3</i>';
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
 function enviarCorreo(destinatario) {
     return new Promise(async (resolve, reject) => {
@@ -33,25 +39,23 @@ function enviarCorreo(destinatario) {
   });
 }
 
-function enviar(){
-    try{
-        const correos = document.getElementById('correos').value;
-        let arregloCorreos= correos.split(',').map(correo => correo.trim());
-        let arregloPromesas=[];
-    
-        for(let i=0;i<arregloCorreos.length;i++){
-            arregloPromesas.push(enviarCorreo(arregloCorreos[i]));
-        }
-    
-        Promise.all(arregloPromesas).then((resultado)=>{
-            console.log(resultado);
+
+ rl.question(
+    "Ingrese los correos a los que desea mandar el correo (separados por comas): ",
+        async (input) => {
+                let arregloCorreos= input.split(',').map(correo => correo.trim());
+                let arregloPromesas=[];
             
-        }).catch((error) =>{
-            console.log(error);
-        });
-    }catch(error){
-        console.log(error);
-    }
-    
-}
+                for(let i=0;i<arregloCorreos.length;i++){
+                    arregloPromesas.push(enviarCorreo(arregloCorreos[i]));
+                }
+            
+                Promise.all(arregloPromesas).then((resultado)=>{
+                    console.log(resultado);
+                    
+                }).catch((error) =>{
+                    console.log(error);
+                });
+            }
+          );
 
